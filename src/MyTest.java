@@ -63,7 +63,7 @@ class MyPanel extends JPanel
 
 
         //龟壳纹理
-        g.setColor(Color.red);
+        g.setColor(Color.black);
         int [] xPoints2 = {131,167,185,167,131,113,131};
         int [] yPoints2 = {100,100,132,163,163,132,100};
         int nPoints2 = 7;
