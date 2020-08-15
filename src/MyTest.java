@@ -9,31 +9,40 @@ public class MyTest
         w.setSize(1024,768);
         w.getContentPane().setBackground(Color.black);
 
-        MyPanel mp  = new MyPanel();
+        MyPanel mp = new MyPanel();
         w.getContentPane().add(mp);
-        mp.setOpaque(false);//画板组件透明
+        mp.setOpaque(false);
+
+        Thread t = new Thread(mp);
+        t.start();
 
         w.setVisible(true);
     }
-
 }
-class MyPanel extends JPanel
+class MyPanel extends JPanel implements Runnable
 {
-
+    int x = 30;
+    int y = 30;
     public void paint(Graphics g)
     {
+        g.setColor(Color.white);
+        g.fillOval(x,y,50,50);
+    }
 
-        g.setColor(Color.orange);
-        g.fillOval(30,10,100,100);
-        g.setColor(Color.black);
-        g.fillOval(0,10,100,100);
-
-
-        for (int i=0;i<=300;i++)
+    public void run()
+    {
+        while(true)
         {
-
-            g.setColor(new Color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255)));
-            g.drawString("*",(int)(Math.random()*1024),(int)(Math.random()*768));
+            y++;
+            if(y>=700)
+            {
+                y=0;
+            }
+            try
+            {
+                Thread.sleep(10);
+            }catch (Exception e){};
+            repaint();
         }
 
     }
