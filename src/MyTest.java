@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class MyTest
 {
@@ -9,57 +10,55 @@ public class MyTest
         w.setSize(1024,768);
 
         MyPanel mp = new MyPanel();
-        mp.setBackground(Color.black);
         w.add(mp);
 
-        Thread t = new Thread(mp);
-        t.start();
-
+        w.addKeyListener(mp);
+        mp.addKeyListener(mp);
         w.setVisible(true);
     }
 }
-class MyPanel extends JPanel implements Runnable
+class MyPanel extends JPanel implements KeyListener
 {
-    int x[] = new int[300];
-    int y[] = new int[300];
+    int x = 30;
+    int y = 30;
 
-    public MyPanel()
-    {
-        for (int i=0;i<300;i++)
-        {
-            x[i]=(int)(Math.random()*1024);
-            y[i]=(int)(Math.random()*768);
-        }
-
-    }
     public void paint(Graphics g)
     {
         super.paint(g);
-        g.setColor(Color.white);
-        for (int i=0;i<300;i++)
-        {
-            g.drawString("*",x[i],y[i]);
-        }
+        g.fillOval(x,y,50,50);
     }
-    public void run()
+
+    public void keyTyped(KeyEvent e)
     {
-        while (true)
+
+    }
+
+
+    public void keyPressed(KeyEvent e)
+    {
+        if (e.getKeyCode()==37)
         {
-            for (int i=0;i<300;i++)
-            {
-                y[i]+=(int)(Math.random()*10);
-                if (y[i]>768)
-                {
-                    y[i]=0;
-                }
-            }
-
-            try
-            {
-                Thread.sleep(10);
-
-            }catch (Exception e){}
-            repaint();
+            x--;
         }
+        if (e.getKeyCode()==38)
+        {
+            y--;
+        }
+        if (e.getKeyCode()==39)
+        {
+            x++;
+        }
+        if (e.getKeyCode()==40)
+        {
+            y++;
+        }
+        repaint();
+    }
+
+
+    public void keyReleased(KeyEvent e)
+    {
+
+
     }
 }
