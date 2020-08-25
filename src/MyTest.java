@@ -56,7 +56,7 @@ class MyPanel extends JPanel implements Runnable
 
             try
             {
-                Thread.sleep(20);
+                Thread.sleep(10);
 
             }catch (Exception e){}
             repaint();
