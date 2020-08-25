@@ -6,110 +6,60 @@ public class MyTest
     public static void main(String[] args)
     {
         JFrame w = new JFrame();
-        w.setSize(600,600);
+        w.setSize(1024,768);
 
         MyPanel mp = new MyPanel();
+        mp.setBackground(Color.black);
         w.add(mp);
 
         Thread t = new Thread(mp);
         t.start();
-        w.setVisible(true);
 
+        w.setVisible(true);
     }
 }
 class MyPanel extends JPanel implements Runnable
 {
-    int att  =0;
-    int x = 100;
-    int y = 20;
+    int x[] = new int[300];
+    int y[] = new int[300];
 
+    public MyPanel()
+    {
+        for (int i=0;i<300;i++)
+        {
+            x[i]=(int)(Math.random()*1024);
+            y[i]=(int)(Math.random()*768);
+        }
 
-    Color c = new Color((int)(255*Math.random()),(int)(255*Math.random()),(int)(255*Math.random()));
+    }
     public void paint(Graphics g)
     {
         super.paint(g);
-        g.setColor(c);
-        g.fillOval(x,y,50,50);
+        g.setColor(Color.white);
+        for (int i=0;i<300;i++)
+        {
+            g.drawString("*",x[i],y[i]);
+        }
     }
     public void run()
     {
         while (true)
         {
-            //定义飞行状态
-            if(att==0)
+            for (int i=0;i<300;i++)
             {
-                x++;
-                y++;
+                y[i]+=(int)(Math.random()*10);
+                if (y[i]>768)
+                {
+                    y[i]=0;
+                }
+            }
 
-            }else if(att==1)
-            {
-                x--;
-                y++;
-            }else if(att==2)
-            {
-                x--;
-                y--;
-            }else if(att==3)
-            {
-                x++;
-                y--;
-            }
-            //改变飞行状态
-            if (x>540)
-            {
-                c = new Color((int)(255*Math.random()),(int)(255*Math.random()),(int)(255*Math.random()));
-                if (att==0)
-                {
-                    att=1;
-                }
-                else
-                {
-                    att=2;
-                }
-            }
-            if (y>520)
-            {
-                c = new Color((int)(255*Math.random()),(int)(255*Math.random()),(int)(255*Math.random()));
-                if (att==1)
-                {
-                    att=2;
-                }
-                else
-                {
-                    att=3;
-                }
-            }
-            if (x<0)
-            {
-                c = new Color((int)(255*Math.random()),(int)(255*Math.random()),(int)(255*Math.random()));
-                if (att==2)
-                {
-                    att=3;
-                }
-                else
-                {
-                    att=0;
-                }
-            }
-            if (y<0)
-            {
-                c = new Color((int)(255*Math.random()),(int)(255*Math.random()),(int)(255*Math.random()));
-                if (att==3)
-                {
-                    att=0;
-                }
-                else
-                {
-                    att=1;
-                }
-            }
             try
             {
-                Thread.sleep(10);
+                Thread.sleep(20);
+
             }catch (Exception e){}
             repaint();
         }
-
-
     }
 }
