@@ -11,7 +11,6 @@ public class MyTest
         w.setLayout(new BorderLayout());
         BigPanel bigPanle = new BigPanel();
         SmallPanel smallPanel = new SmallPanel();
-
         w.add(bigPanle,BorderLayout.NORTH);
         w.add(smallPanel,BorderLayout.SOUTH);
 
