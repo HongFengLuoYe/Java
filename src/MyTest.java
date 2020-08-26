@@ -6,22 +6,46 @@ public class MyTest
     public static void main(String[] args)
     {
         JFrame w = new JFrame();
-        w.setSize(100,200);
-        JButton bt1 = new JButton("1");
-        JButton bt2 = new JButton("2");
-        JButton bt3 = new JButton("388888888888888");
-        JButton bt4 = new JButton("4");
-        JButton bt5 = new JButton("5");
+        w.setSize(100,150);
 
-        w.setLayout(new GridLayout(3,2));
-        w.add(bt1);
-        w.add(bt2);
-        w.add(bt3);
-        w.add(bt4);
-        w.add(bt5);
+        w.setLayout(new BorderLayout());
+        BigPanel bigPanle = new BigPanel();
+        SmallPanel smallPanel = new SmallPanel();
 
+        w.add(bigPanle,BorderLayout.NORTH);
+        w.add(smallPanel,BorderLayout.SOUTH);
 
         w.setVisible(true);
 
+    }
+}
+class BigPanel extends JPanel
+{
+    public BigPanel()
+    {
+        this.setLayout(new GridLayout(2,2));
+        JLabel userName = new JLabel("用户名:");
+        JLabel passWord = new JLabel("密码:");
+        JTextField userNameField = new JTextField();
+        JTextField passWordField = new JTextField();
+
+        this.add(userName);
+        this.add(userNameField);
+        this.add(passWord);
+        this.add(passWordField);
+    }
+}
+class SmallPanel extends JPanel
+{
+    public SmallPanel()
+    {
+        this.setLayout(new FlowLayout());
+        JButton register = new JButton("注册");
+        JButton login = new JButton("登录");
+        JButton cancel = new JButton("取消");
+
+        this.add(register);
+        this.add(login);
+        this.add(cancel);
     }
 }
