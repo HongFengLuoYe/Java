@@ -1,20 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-
-public class QQmain
+class QQmain extends JFrame
 {
-    public static void main(String[] args)
+    public QQmain()
     {
-        JFrame w = new JFrame();
-        w.setSize(300,400);
-
-        //输入框
+        //组件
         JTextField input = new JTextField();
-        //下拉框
         JComboBox box = new JComboBox();
-        //发送按钮
         JButton sentBt = new JButton("发送");
-        //滚动区域
         JTextArea area = new JTextArea();
         JScrollPane scrollPane = new JScrollPane(area);
 
@@ -31,10 +24,10 @@ public class QQmain
         bigPanel.add(smallPanel,BorderLayout.CENTER);
 
         //布局窗体
-        w.setLayout(new BorderLayout());
-        w.add(bigPanel,BorderLayout.NORTH);
-        w.add(scrollPane,BorderLayout.CENTER);
-
-        w.setVisible(true);
+        this.setSize(300,400);
+        this.setLayout(new BorderLayout());
+        this.add(bigPanel,BorderLayout.NORTH);
+        this.add(scrollPane,BorderLayout.CENTER);
+        this.setVisible(true);
     }
 }
