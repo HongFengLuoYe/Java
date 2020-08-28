@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class Controller
 {
@@ -16,11 +17,13 @@ public class Controller
 //       };
         try
         {
-            File f = new File("D:\\work\\test.txt");
-            FileInputStream fis = new FileInputStream(f);
+            File f1 = new File("D:\\work\\test.txt");
+            File f2 = new File("D:\\work\\test2.txt");
+            FileInputStream fis = new FileInputStream(f1);
+            FileOutputStream fos = new FileOutputStream(f2);
             while(fis.available()>0)
             {
-                System.out.println((char)fis.read());
+                fos.write(fis.read());
             }
 
         }catch (Exception e){}
