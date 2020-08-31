@@ -10,13 +10,17 @@ public class Controller
     {
         try
         {
-            File f = new File("D:\\work\\test.txt");
-            FileReader fr = new FileReader(f);
+            File f1 = new File("D:\\work\\test.txt");
+            File f2 = new File("D:\\work\\test2.txt");
+            FileReader fr = new FileReader(f1);
             BufferedReader br = new BufferedReader(fr);
+            FileWriter fw = new FileWriter(f2);
+            PrintWriter pw = new PrintWriter(fw);
             while (br.ready())
             {
-                System.out.println(br.readLine());
+                pw.println(br.readLine());
             }
+            pw.close();
         }catch (Exception e)
         {
             e.printStackTrace();
