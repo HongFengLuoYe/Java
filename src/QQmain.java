@@ -1,14 +1,21 @@
 import javax.swing.*;
 import java.awt.*;
-class QQmain extends JFrame
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+
+class QQmain extends JFrame implements ActionListener
 {
+    JTextField input;
+    JTextArea area;
+    JButton sentBt;
     public QQmain()
     {
         //组件
-        JTextField input = new JTextField();
+        input = new JTextField();
         JComboBox box = new JComboBox();
-        JButton sentBt = new JButton("发送");
-        JTextArea area = new JTextArea();
+        sentBt = new JButton("发送");
+        area = new JTextArea();
         JScrollPane scrollPane = new JScrollPane(area);
 
         //布局小面板
@@ -29,5 +36,66 @@ class QQmain extends JFrame
         this.add(bigPanel,BorderLayout.NORTH);
         this.add(scrollPane,BorderLayout.CENTER);
         this.setVisible(true);
+
+        readMessage();
+        registerActionEvent();
+
+
     }
+    private void sentMessage()
+    {
+        if (input.getText() != null && !input.getText().equals(""))
+        {
+            area.append(input.getText()+"\n");
+        }
+    }
+    private void saveMessage()
+    {
+        try
+        {
+            File qq = new File("D:\\work\\聊天记录.qq");
+            FileWriter fw = new FileWriter(qq,true);
+            PrintWriter pw = new PrintWriter(fw);
+            pw.println(input.getText());
+            pw.close();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+    }
+    private void readMessage()
+    {
+        try
+        {
+            File qq = new File("D:\\work\\聊天记录.qq");
+            FileReader fr = new FileReader(qq);
+            BufferedReader br = new BufferedReader(fr);
+            while(br.ready())
+            {
+                area.append(br.readLine()+"\n");
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+    private void blankMessage()
+    {
+        input.setText(null);
+    }
+    private void registerActionEvent()
+    {
+        sentBt.addActionListener(this);
+    }
+    public void actionPerformed(ActionEvent e)
+    {
+        sentMessage();
+        saveMessage();
+        blankMessage();
+    }
+
+
 }
