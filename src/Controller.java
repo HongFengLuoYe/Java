@@ -7,32 +7,54 @@ public class Controller
 
     public static void main(String[] args)
     {
-//        //登陆界面
-//        QQLogin loginInterface = new QQLogin();
-//        //登录成功后
-//        loginInterface.loginSucceed = () ->
-//        {
-//           loginInterface.setVisible(false);
-//           QQmain  mainInterface = new QQmain();
-//       };
+
+        encryption();
+        decrypt();
+
+    }
+    public static void encryption()
+    {
         try
         {
-            File f1 = new File("D:\\工具\\83.0.4103.61_chrome_installer.exe");
-            File f2 = new File("D:\\work\\83.0.4103.61_chrome_installer.exe");
+            File f1 = new File("D:\\work\\test.txt");
+            File f2 = new File("D:\\work\\test2.txt");
             FileInputStream fis = new FileInputStream(f1);
             FileOutputStream fos = new FileOutputStream(f2);
-            byte[] tmp = new byte[8912];
-            int lenght = fis.available()/8912;
-            for (int i=0;i<lenght;i++)
+            int length = fis.available();
+            for (int i=0;i<length;i++)
             {
-                fis.read(tmp);
-                fos.write(tmp);
+                fos.write(fis.read()+100);
             }
-            int size = fis.read(tmp);
-            fos.write(tmp,0,size);
+
+        }catch (Exception e){}
+    }
+    public static void decrypt()
+    {
+        try
+        {
+            File f1 = new File("D:\\work\\test2.txt");
+            File f2 = new File("D:\\work\\test3.txt");
+            FileInputStream fis = new FileInputStream(f1);
+            FileOutputStream fos = new FileOutputStream(f2);
+            int length = fis.available();
+            for (int i=0;i<length;i++)
+            {
+                fos.write(fis.read()-100);
+            }
         }catch (Exception e){}
 
+    }
 
+    public static void login()
+    {
+        //登陆界面
+        QQLogin loginInterface = new QQLogin();
+        //登录成功后
+        loginInterface.loginSucceed = () ->
+        {
+            loginInterface.setVisible(false);
+            QQmain  mainInterface = new QQmain();
+        };
     }
 
 
