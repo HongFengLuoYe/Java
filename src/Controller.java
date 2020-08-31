@@ -17,15 +17,19 @@ public class Controller
 //       };
         try
         {
-            File f1 = new File("D:\\work\\test.txt");
-            File f2 = new File("D:\\work\\test2.txt");
+            File f1 = new File("D:\\工具\\83.0.4103.61_chrome_installer.exe");
+            File f2 = new File("D:\\work\\83.0.4103.61_chrome_installer.exe");
             FileInputStream fis = new FileInputStream(f1);
             FileOutputStream fos = new FileOutputStream(f2);
-            while(fis.available()>0)
+            byte[] tmp = new byte[8912];
+            int lenght = fis.available()/8912;
+            for (int i=0;i<lenght;i++)
             {
-                fos.write(fis.read());
+                fis.read(tmp);
+                fos.write(tmp);
             }
-
+            int size = fis.read(tmp);
+            fos.write(tmp,0,size);
         }catch (Exception e){}
 
 
